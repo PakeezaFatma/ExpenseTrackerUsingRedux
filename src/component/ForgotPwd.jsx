@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { json } from 'react-router-dom';
+import { Link, json } from 'react-router-dom';
 
 const ForgotPwd = () => {
     const [confirmEmail,setConfirmEmail]=useState("");
@@ -36,18 +36,21 @@ const ForgotPwd = () => {
         auth();
     }
   return (
-    <div class="container p-3 my-5 d-flex flex-column w-50">
-       <h5>Enter with the email which you have registered</h5> 
+    <div class="container p-3 my-5 d-flex flex-column w-50 border border-2-solid border-primary ">
+       <h5 >Enter with the email which you have registered</h5> 
        
           <input
             type="email"
-            class="form-control"
+            class="form-control mb-2"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             value={confirmEmail}
             onChange={ConfEmailHandler}
           />
-          <button onClick={submitHandler}>Send Link</button>
+          <div className='d-flex justify-content-between'>
+          <button  class="btn btn-primary mt-3" onClick={submitHandler}>Send Link</button>
+          <Link to="/">All ready a User ? Login</Link>
+          </div>
     </div>
   )
 }

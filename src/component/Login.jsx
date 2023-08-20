@@ -1,7 +1,9 @@
-import React, {  useState } from "react";
+import React, {  useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { ContextAPI } from "../store/ContextAPI";
 
 const Login = () => {
+  const ctx=useContext(ContextAPI);
   const [email, setEmail]=useState("");
   const [psw,setPsw]=useState("");
   const [CPsw,CsetPsw]=useState("")
@@ -41,10 +43,15 @@ const Login = () => {
       }
     })
     const data =await res.json();
-    console.log(data)
+    console.log(data);
+    localStorage.setItem("token",data.idToken);
+    ctx.setisToken(true);
     if(data.error)
     {
       alert(data.error.message);
+    }
+    else{
+      alert("login Sucessfull")
     }
    }
    catch(err){
@@ -55,11 +62,19 @@ const Login = () => {
   const submit=(e)=>{
     e.preventDefault();
     console.log(email,psw);
-    auth();
+    if(email.trim()===""){
+
+      return 
+    }
+    else{
+      auth()
+    }
+   
   }
+
   return (
-    <div class="container p-3 my-5 d-flex flex-column w-50">
-      <form onSubmit={submit}>
+    <div class="container p-3 my-5 d-flex flex-column w-50 border border-2-solid border-primary ">
+      <form onSubmit={submit} className="m-3">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
             Email address
@@ -109,7 +124,7 @@ const Login = () => {
           {login ? "Sign in": "Sign Up"}
         </button>
         <h5><Link to="/forgotpwd">Forgot Password</Link></h5>
-        <button class="btn btn-primary" onClick={setLoginHandler}>
+        <button class="btn btn-primary" type="button" onClick={setLoginHandler}>
           {
             login ? "Sign Up" :"All ready You have an account Login"
 
