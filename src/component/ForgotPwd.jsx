@@ -8,7 +8,7 @@ const ForgotPwd = () => {
     }
     let url;
     const auth=async()=>{
-      url="https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDs-VSDlngvQJKL0oshYK5r4pM_rSD7zqE"
+      url="https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDvLRWgwVfsZvKpvNKNx7N3K8VdxIKoDfM"
       try{
 
         const res=await fetch(url,{

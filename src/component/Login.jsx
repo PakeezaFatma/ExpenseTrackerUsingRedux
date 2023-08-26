@@ -1,9 +1,16 @@
 import React, {  useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ContextAPI } from "../store/ContextAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { authAction } from "../reduxStore/AuthSlice";
 
 const Login = () => {
-  const ctx=useContext(ContextAPI);
+  const isAuthRedux = useSelector((state)=>state.AuthReducer.isAuthenticate)
+  const dispatch = useDispatch();
+
+  // const isAuthRedux =useSelector((state)=>state.AuthReducer.isAuthenticate)
+  // const dispatch =useDispatch();
+  // const ctx=useContext(ContextAPI);
   const [email, setEmail]=useState("");
   const [psw,setPsw]=useState("");
   const [CPsw,CsetPsw]=useState("")
@@ -25,9 +32,9 @@ const Login = () => {
   let url;
   const auth =async ()=>{
     if(login){
-      url="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDs-VSDlngvQJKL0oshYK5r4pM_rSD7zqE";
+      url="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDvLRWgwVfsZvKpvNKNx7N3K8VdxIKoDfM";
     }else{
-      url="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDs-VSDlngvQJKL0oshYK5r4pM_rSD7zqE";
+      url="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDvLRWgwVfsZvKpvNKNx7N3K8VdxIKoDfM";
     }
     
    try{
@@ -45,13 +52,19 @@ const Login = () => {
     const data =await res.json();
     console.log(data);
     localStorage.setItem("token",data.idToken);
-    ctx.setisToken(true);
+    const emailToBeSave = email.replace(/['@','.']/g,'');
+    localStorage.setItem("Email",emailToBeSave);
+    // ctx.setisToken(true);
+
+    
+    // dispatch(authAction.login());
     if(data.error)
     {
       alert(data.error.message);
     }
     else{
-      alert("login Sucessfull")
+      alert("login Sucessfull");
+      dispatch(authAction.login());
     }
    }
    catch(err){

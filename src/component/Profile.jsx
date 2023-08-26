@@ -12,7 +12,7 @@ const Profile = () => {
 
   let url;
   const auth=async()=>{
-    url="https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDs-VSDlngvQJKL0oshYK5r4pM_rSD7zqE";
+    url="https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDvLRWgwVfsZvKpvNKNx7N3K8VdxIKoDfM";
     try{
       const res=await fetch (url,{
         method:"POST",
@@ -41,7 +41,7 @@ const Profile = () => {
     }
   }
   const toGetData=async()=>{
-    url="https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDs-VSDlngvQJKL0oshYK5r4pM_rSD7zqE"
+    url="https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDvLRWgwVfsZvKpvNKNx7N3K8VdxIKoDfM"
     {
       try{
         const res=await fetch(url,{
